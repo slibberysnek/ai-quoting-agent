@@ -1,0 +1,3 @@
+agreement_id,customer_id,buying_group_id,stock_group_id,start_date,end_date,discount_percentage,requires_review
+TT-Q2-2016,1,1,7,2016-04-01,2016-06-30,15.00,false
+TT-HO-VOLUME,1,,,2016-06-01,2016-08-31,5.00,true

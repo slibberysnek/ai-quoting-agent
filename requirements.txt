@@ -1,0 +1,9 @@
+# Azure App Service's build system installs this file during deployment.
+# Keep the ranges aligned with pyproject.toml so local and cloud runs match.
+fastapi>=0.115,<1
+mssql-python>=1.0,<2
+openpyxl>=3.1
+pydantic>=2.0
+pypdf>=6.0
+python-docx>=1.1
+uvicorn>=0.30,<1

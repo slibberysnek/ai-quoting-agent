@@ -1,0 +1,414 @@
+{
+  "run_id": "synthetic-rfq-001-shortage",
+  "created_at": "2026-10-23T13:00:00+00:00",
+  "classifier_model": "offline/scripted-classifier",
+  "handler_model": "offline/scripted-handler",
+  "email": {
+    "source_path": "synthetic://incoming.eml",
+    "message_id": "<synthetic-rfq-001@cedar.example>",
+    "sent_at": "Fri, 23 Oct 2026 09:00:00 -0400",
+    "sender": "Casey Buyer",
+    "from_address": "casey@cedar.example",
+    "reply_to": [],
+    "to": [
+      "quotes@sample.example"
+    ],
+    "cc": [],
+    "subject": "RFQ: packing supplies for Cedar Workshop",
+    "body": "Hello,\nPlease quote the following for Cedar Workshop:\n- 2 Outer of stock item 101: Protective packing paper (10 Each per Outer).\n- 3 Each of stock item 102: Bench tape dispenser.\nRequested delivery: October 30, 2026. Please confirm freight separately.\nThanks,\nCasey",
+    "headers": {
+      "Message-ID": "<synthetic-rfq-001@cedar.example>",
+      "Date": "Fri, 23 Oct 2026 09:00:00 -0400",
+      "From": "Casey Buyer <casey@cedar.example>",
+      "To": "Quotes <quotes@sample.example>",
+      "Subject": "RFQ: packing supplies for Cedar Workshop"
+    },
+    "ingestion_issues": [],
+    "attachments": []
+  },
+  "classification": {
+    "intent": "new_quote_request",
+    "confidence": 0.98,
+    "rationale": "The email requests product prices and availability.",
+    "evidence": [
+      "Please quote the following for Cedar Workshop"
+    ]
+  },
+  "handler_draft": {
+    "customer_hint": "Cedar Workshop",
+    "required_date": "2026-10-30",
+    "pricing_agreement_hints": [],
+    "partial_shipment_allowed": null,
+    "lines": [
+      {
+        "description": "Protective packing paper",
+        "quantity": 2.0,
+        "unit": "Outer",
+        "stock_item_id_hint": 101,
+        "evidence": "2 Outer of stock item 101"
+      },
+      {
+        "description": "Bench tape dispenser",
+        "quantity": 3.0,
+        "unit": "Each",
+        "stock_item_id_hint": 102,
+        "evidence": "3 Each of stock item 102"
+      }
+    ],
+    "summary": "Packing supplies for Cedar Workshop.",
+    "suggested_response": "Model prose is advisory; deterministic code prepares the financial proposal."
+  },
+  "tool_trace": [
+    {
+      "name": "find_customer",
+      "arguments": {
+        "sender_email": "casey@cedar.example",
+        "customer_hint": "Cedar Workshop"
+      },
+      "result": {
+        "customer_id": 501,
+        "customer_name": "Cedar Workshop",
+        "match_type": "sender_email",
+        "evidence": "Contact email casey@cedar.example belongs to Casey Buyer"
+      }
+    },
+    {
+      "name": "search_products",
+      "arguments": {
+        "query": "Protective packing paper",
+        "stock_item_id": 101
+      },
+      "result": {
+        "query": "Protective packing paper",
+        "candidates": [
+          {
+            "stock_item_id": 101,
+            "stock_item_name": "Protective packing paper",
+            "quantity_per_outer": 10,
+            "unit_price": "2.35",
+            "tax_rate": "7.5",
+            "unit_name": "Each",
+            "quantity_on_hand": 80,
+            "match_type": "exact_id",
+            "score": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "name": "normalize_quantity",
+      "arguments": {
+        "stock_item_id": 101,
+        "quantity": 2,
+        "from_unit": "Outer"
+      },
+      "result": {
+        "stock_item_id": 101,
+        "input_quantity": 2,
+        "input_unit": "Outer",
+        "normalized_quantity": 20.0,
+        "normalized_unit": "Each",
+        "multiplier": 10.0
+      }
+    },
+    {
+      "name": "get_inventory",
+      "arguments": {
+        "stock_item_id": 101
+      },
+      "result": {
+        "stock_item_id": 101,
+        "stock_item_name": "Protective packing paper",
+        "quantity_on_hand": 80,
+        "stock_unit": "Each"
+      }
+    },
+    {
+      "name": "get_catalog_price",
+      "arguments": {
+        "stock_item_id": 101
+      },
+      "result": {
+        "stock_item_id": 101,
+        "stock_item_name": "Protective packing paper",
+        "unit_price": 2.35,
+        "tax_rate_percent": 7.5,
+        "price_unit": "Each",
+        "price_source": "Synthetic demonstration catalog"
+      }
+    },
+    {
+      "name": "search_products",
+      "arguments": {
+        "query": "Bench tape dispenser",
+        "stock_item_id": 102
+      },
+      "result": {
+        "query": "Bench tape dispenser",
+        "candidates": [
+          {
+            "stock_item_id": 102,
+            "stock_item_name": "Bench tape dispenser",
+            "quantity_per_outer": 1,
+            "unit_price": "12.40",
+            "tax_rate": "7.5",
+            "unit_name": "Each",
+            "quantity_on_hand": 2,
+            "match_type": "exact_id",
+            "score": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "name": "normalize_quantity",
+      "arguments": {
+        "stock_item_id": 102,
+        "quantity": 3,
+        "from_unit": "Each"
+      },
+      "result": {
+        "stock_item_id": 102,
+        "input_quantity": 3,
+        "input_unit": "Each",
+        "normalized_quantity": 3,
+        "normalized_unit": "Each",
+        "multiplier": 1.0
+      }
+    },
+    {
+      "name": "get_inventory",
+      "arguments": {
+        "stock_item_id": 102
+      },
+      "result": {
+        "stock_item_id": 102,
+        "stock_item_name": "Bench tape dispenser",
+        "quantity_on_hand": 2,
+        "stock_unit": "Each"
+      }
+    },
+    {
+      "name": "get_catalog_price",
+      "arguments": {
+        "stock_item_id": 102
+      },
+      "result": {
+        "stock_item_id": 102,
+        "stock_item_name": "Bench tape dispenser",
+        "unit_price": 12.4,
+        "tax_rate_percent": 7.5,
+        "price_unit": "Each",
+        "price_source": "Synthetic demonstration catalog"
+      }
+    }
+  ],
+  "validation_trace": [
+    {
+      "name": "find_customer",
+      "arguments": {
+        "sender_email": "casey@cedar.example",
+        "customer_hint": "Cedar Workshop"
+      },
+      "result": {
+        "customer_id": 501,
+        "customer_name": "Cedar Workshop",
+        "match_type": "sender_email",
+        "evidence": "Contact email casey@cedar.example belongs to Casey Buyer"
+      }
+    },
+    {
+      "name": "search_products",
+      "arguments": {
+        "query": "Protective packing paper",
+        "stock_item_id": 101
+      },
+      "result": {
+        "query": "Protective packing paper",
+        "candidates": [
+          {
+            "stock_item_id": 101,
+            "stock_item_name": "Protective packing paper",
+            "quantity_per_outer": 10,
+            "unit_price": "2.35",
+            "tax_rate": "7.5",
+            "unit_name": "Each",
+            "quantity_on_hand": 80,
+            "match_type": "exact_id",
+            "score": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "name": "normalize_quantity",
+      "arguments": {
+        "stock_item_id": 101,
+        "quantity": 2.0,
+        "from_unit": "Outer"
+      },
+      "result": {
+        "stock_item_id": 101,
+        "input_quantity": 2.0,
+        "input_unit": "Outer",
+        "normalized_quantity": 20.0,
+        "normalized_unit": "Each",
+        "multiplier": 10.0
+      }
+    },
+    {
+      "name": "get_inventory",
+      "arguments": {
+        "stock_item_id": 101
+      },
+      "result": {
+        "stock_item_id": 101,
+        "stock_item_name": "Protective packing paper",
+        "quantity_on_hand": 80,
+        "stock_unit": "Each"
+      }
+    },
+    {
+      "name": "get_catalog_price",
+      "arguments": {
+        "stock_item_id": 101
+      },
+      "result": {
+        "stock_item_id": 101,
+        "stock_item_name": "Protective packing paper",
+        "unit_price": 2.35,
+        "tax_rate_percent": 7.5,
+        "price_unit": "Each",
+        "price_source": "Synthetic demonstration catalog"
+      }
+    },
+    {
+      "name": "search_products",
+      "arguments": {
+        "query": "Bench tape dispenser",
+        "stock_item_id": 102
+      },
+      "result": {
+        "query": "Bench tape dispenser",
+        "candidates": [
+          {
+            "stock_item_id": 102,
+            "stock_item_name": "Bench tape dispenser",
+            "quantity_per_outer": 1,
+            "unit_price": "12.40",
+            "tax_rate": "7.5",
+            "unit_name": "Each",
+            "quantity_on_hand": 2,
+            "match_type": "exact_id",
+            "score": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "name": "normalize_quantity",
+      "arguments": {
+        "stock_item_id": 102,
+        "quantity": 3.0,
+        "from_unit": "Each"
+      },
+      "result": {
+        "stock_item_id": 102,
+        "input_quantity": 3.0,
+        "input_unit": "Each",
+        "normalized_quantity": 3.0,
+        "normalized_unit": "Each",
+        "multiplier": 1.0
+      }
+    },
+    {
+      "name": "get_inventory",
+      "arguments": {
+        "stock_item_id": 102
+      },
+      "result": {
+        "stock_item_id": 102,
+        "stock_item_name": "Bench tape dispenser",
+        "quantity_on_hand": 2,
+        "stock_unit": "Each"
+      }
+    },
+    {
+      "name": "get_catalog_price",
+      "arguments": {
+        "stock_item_id": 102
+      },
+      "result": {
+        "stock_item_id": 102,
+        "stock_item_name": "Bench tape dispenser",
+        "unit_price": 12.4,
+        "tax_rate_percent": 7.5,
+        "price_unit": "Each",
+        "price_source": "Synthetic demonstration catalog"
+      }
+    }
+  ],
+  "result": {
+    "outcome": "insufficient_stock",
+    "reason_codes": [
+      "uom_conversion",
+      "insufficient_stock"
+    ],
+    "customer": {
+      "customer_id": 501,
+      "customer_name": "Cedar Workshop",
+      "match_type": "sender_email",
+      "evidence": "Contact email casey@cedar.example belongs to Casey Buyer"
+    },
+    "pricing_agreements": [],
+    "lines": [
+      {
+        "requested_description": "Protective packing paper",
+        "requested_quantity": 2.0,
+        "requested_unit": "Outer",
+        "stock_item_id": 101,
+        "stock_item_name": "Protective packing paper",
+        "match_type": "exact_id",
+        "normalized_quantity": 20.0,
+        "normalized_unit": "Each",
+        "quantity_on_hand": 80,
+        "catalog_unit_price": 2.35,
+        "line_subtotal": 47.0,
+        "tax_rate_percent": 7.5,
+        "tax_amount": 3.53,
+        "line_total": 50.53,
+        "issues": [
+          "uom_conversion"
+        ]
+      },
+      {
+        "requested_description": "Bench tape dispenser",
+        "requested_quantity": 3.0,
+        "requested_unit": "Each",
+        "stock_item_id": 102,
+        "stock_item_name": "Bench tape dispenser",
+        "match_type": "exact_id",
+        "normalized_quantity": 3.0,
+        "normalized_unit": "Each",
+        "quantity_on_hand": 2,
+        "catalog_unit_price": 12.4,
+        "line_subtotal": 37.2,
+        "tax_rate_percent": 7.5,
+        "tax_amount": 2.79,
+        "line_total": 39.99,
+        "issues": [
+          "insufficient_stock"
+        ]
+      }
+    ],
+    "subtotal": null,
+    "tax_total": null,
+    "total": null,
+    "freight": "TBD",
+    "proposed_subject": "Re: RFQ: packing supplies for Cedar Workshop",
+    "proposed_body": "Hello Casey,\n\nWe cannot produce the requested quote because the full quantity is not currently available. Stock item 102: combined request 3.0 exceeds 2 on hand",
+    "issues": [
+      "Stock item 102: combined request 3.0 exceeds 2 on hand"
+    ]
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "provenance": "Authored synthetic model responses for offline replay; not captured live model output.",
+  "messages": [
+    {
+      "content": "{\"intent\": \"new_quote_request\", \"confidence\": 0.98, \"rationale\": \"The email requests product prices and availability.\", \"evidence\": [\"Please quote the following for Cedar Workshop\"]}"
+    },
+    {
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "demo-0",
+          "type": "function",
+          "function": {
+            "name": "find_customer",
+            "arguments": "{\"sender_email\": \"casey@cedar.example\", \"customer_hint\": \"Cedar Workshop\"}"
+          }
+        },
+        {
+          "id": "demo-1",
+          "type": "function",
+          "function": {
+            "name": "search_products",
+            "arguments": "{\"query\": \"Protective packing paper\", \"stock_item_id\": 101}"
+          }
+        },
+        {
+          "id": "demo-2",
+          "type": "function",
+          "function": {
+            "name": "normalize_quantity",
+            "arguments": "{\"stock_item_id\": 101, \"quantity\": 2, \"from_unit\": \"Outer\"}"
+          }
+        },
+        {
+          "id": "demo-3",
+          "type": "function",
+          "function": {
+            "name": "get_inventory",
+            "arguments": "{\"stock_item_id\": 101}"
+          }
+        },
+        {
+          "id": "demo-4",
+          "type": "function",
+          "function": {
+            "name": "get_catalog_price",
+            "arguments": "{\"stock_item_id\": 101}"
+          }
+        },
+        {
+          "id": "demo-5",
+          "type": "function",
+          "function": {
+            "name": "search_products",
+            "arguments": "{\"query\": \"Bench tape dispenser\", \"stock_item_id\": 102}"
+          }
+        },
+        {
+          "id": "demo-6",
+          "type": "function",
+          "function": {
+            "name": "normalize_quantity",
+            "arguments": "{\"stock_item_id\": 102, \"quantity\": 3, \"from_unit\": \"Each\"}"
+          }
+        },
+        {
+          "id": "demo-7",
+          "type": "function",
+          "function": {
+            "name": "get_inventory",
+            "arguments": "{\"stock_item_id\": 102}"
+          }
+        },
+        {
+          "id": "demo-8",
+          "type": "function",
+          "function": {
+            "name": "get_catalog_price",
+            "arguments": "{\"stock_item_id\": 102}"
+          }
+        }
+      ]
+    },
+    {
+      "content": "{\"customer_hint\": \"Cedar Workshop\", \"required_date\": \"2026-10-30\", \"pricing_agreement_hints\": [], \"partial_shipment_allowed\": null, \"lines\": [{\"description\": \"Protective packing paper\", \"quantity\": 2, \"unit\": \"Outer\", \"stock_item_id_hint\": 101, \"evidence\": \"2 Outer of stock item 101\"}, {\"description\": \"Bench tape dispenser\", \"quantity\": 3, \"unit\": \"Each\", \"stock_item_id_hint\": 102, \"evidence\": \"3 Each of stock item 102\"}], \"summary\": \"Packing supplies for Cedar Workshop.\", \"suggested_response\": \"Model prose is advisory; deterministic code prepares the financial proposal.\"}"
+    }
+  ]
+}

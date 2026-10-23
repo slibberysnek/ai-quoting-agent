@@ -1,0 +1,35 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+.venv/
+*.egg-info/
+
+# Local credentials and generated agent output must never be committed.
+or_key.txt
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+runs/
+deployment/*.zip
+
+# Reproducible downloads and generated databases stay local.
+data/source/*.bacpac
+data/source/.*.download
+data/sqlite/*.sqlite3
+data/sqlite/*.sqlite3-*
+data/sqlite/.*.tmp
+data/sqlite/build_manifest.json
+data/portfolio_artifacts/
+
+# Local packaging and legacy fixture QA output.
+build/
+dist/
+data/portfolio_qa/
+
+# Local exploratory plans are retained outside the published source set.
+DEMO_PLAN.md
+HOSTING_RESEARCH.md
+PLATFORM_DECISION.md

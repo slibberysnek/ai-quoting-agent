@@ -1,0 +1,2 @@
+agreement_id,customer_id,start_date,end_date,discount_percentage,requires_review
+CEDAR-2026,501,2026-01-01,2026-12-31,5,true

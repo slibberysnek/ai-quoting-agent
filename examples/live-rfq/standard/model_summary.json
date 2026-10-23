@@ -1,0 +1,36 @@
+{
+  "mode": "live_openrouter_synthetic_data",
+  "scenario": "standard",
+  "network_policy": "POST https://openrouter.ai/api/v1/chat/completions only; redirects blocked",
+  "request_count": 5,
+  "delivery_adapters_initialized": false,
+  "calls": [
+    {
+      "requested_model": "deepseek/deepseek-v4-flash-0731",
+      "returned_model": "deepseek/deepseek-v4-flash-0731",
+      "response_schema": "Classification"
+    },
+    {
+      "requested_model": "deepseek/deepseek-v4-pro-0813",
+      "returned_model": "deepseek/deepseek-v4-pro-0813",
+      "response_schema": "tool_research"
+    },
+    {
+      "requested_model": "deepseek/deepseek-v4-pro-0813",
+      "returned_model": "deepseek/deepseek-v4-pro-0813",
+      "response_schema": "tool_research"
+    },
+    {
+      "requested_model": "deepseek/deepseek-v4-pro-0813",
+      "returned_model": "deepseek/deepseek-v4-pro-0813",
+      "response_schema": "tool_research"
+    },
+    {
+      "requested_model": "deepseek/deepseek-v4-pro-0813",
+      "returned_model": "deepseek/deepseek-v4-pro-0813",
+      "response_schema": "HandlerDraft"
+    }
+  ],
+  "provenance": "Actual live OpenRouter run using synthetic data. Raw provider messages and private run history are not included in this public summary.",
+  "run_sha256": "e46eed0efc972ed8083668acacaa3609a53dc8df15b49a9b04021f901a60e148"
+}

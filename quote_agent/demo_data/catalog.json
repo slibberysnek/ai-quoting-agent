@@ -1,0 +1,37 @@
+{
+  "customer": {
+    "id": 501,
+    "name": "Cedar Workshop",
+    "contact": "Casey Buyer",
+    "email": "casey@cedar.example"
+  },
+  "products": [
+    {
+      "id": 101,
+      "name": "Protective packing paper",
+      "outer": 10,
+      "price": "2.35",
+      "tax": "7.5",
+      "unit": "Each",
+      "stock": 80
+    },
+    {
+      "id": 102,
+      "name": "Bench tape dispenser",
+      "outer": 1,
+      "price": "12.40",
+      "tax": "7.5",
+      "unit": "Each",
+      "stock": 12
+    },
+    {
+      "id": 103,
+      "name": "Heavy bench tape dispenser",
+      "outer": 1,
+      "price": "19.50",
+      "tax": "7.5",
+      "unit": "Each",
+      "stock": 5
+    }
+  ]
+}
